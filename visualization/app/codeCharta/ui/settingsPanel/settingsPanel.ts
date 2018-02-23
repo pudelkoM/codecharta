@@ -3,6 +3,7 @@ import {STATISTIC_OPS, StatisticMapService} from "../../core/statistic/statistic
 import {SettingsService, Settings, SettingsServiceSubscriber} from "../../core/settings/settings.service";
 import {DataService, DataServiceSubscriber, DataModel} from "../../core/data/data.service";
 import {TreeMapService} from "../../core/treemap/treemap.service";
+import {ReportService} from "../../core/report/report.service";
 
 /**
  * Controls the settingsPanel
@@ -20,6 +21,7 @@ export class SettingsPanelController implements DataServiceSubscriber, SettingsS
     constructor(
         private settingsService: SettingsService,
         private dataService: DataService,
+        private reportService: ReportService,
         private treeMapService: TreeMapService,
         private statisticMapService: StatisticMapService
     ) {
@@ -53,6 +55,18 @@ export class SettingsPanelController implements DataServiceSubscriber, SettingsS
      */
     onSettingsChanged(settings: Settings) {
         this.sliderOptions.ceil = this.treeMapService.getMaxMetricInAllRevisions(settings.colorMetric);
+    }
+
+    onGenerateCsvReport() {
+        let csv = this.reportService.generateCSVReport();
+
+        let hiddenElement = document.createElement('a');
+        hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);
+        hiddenElement.target = '_blank';
+        hiddenElement.download = 'report.csv';
+        hiddenElement.click();
+        hiddenElement.remove();
+
     }
 
     /**

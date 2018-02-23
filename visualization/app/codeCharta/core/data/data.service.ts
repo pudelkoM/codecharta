@@ -91,7 +91,12 @@ export class DataService {
      */
     public setMetrics(index: number) {
         if (this._data.revisions[index] !== (null || undefined)) {
-            let root = d3.hierarchy<CodeMapNode>(this._data.revisions[index].root);
+            this._data.metrics = this.getMetricsFromMap(this._data.revisions[index]);;
+        }
+    }
+
+    public getMetricsFromMap(map: CodeMap): string[] {
+            let root = d3.hierarchy<CodeMapNode>(map.root);
             let leaves: HierarchyNode<CodeMapNode>[] = root.leaves();
             let attributeList = leaves.map(function (d: HierarchyNode<CodeMapNode>) {
                 return d.data.attributes ? Object.keys(d.data.attributes) : [];
@@ -101,9 +106,9 @@ export class DataService {
                     return left.indexOf(el) === -1;
                 }));
             });
-            this._data.metrics = attributes;
-        }
+            return attributes;
     }
+
 
     /**
      * resets all maps (deletes them)
