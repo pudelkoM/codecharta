@@ -99,8 +99,8 @@ export class CodeMapRenderService implements SettingsServiceSubscriber, CodeMapM
             areaKey: s.areaMetric,
             heightKey: s.heightMetric,
             margin: s.margin,
-            fanoutDepths: [1,2],
-            fanoutScale: 2
+            fanoutDepths: s.fanoutDepths,
+            fanoutScale: s.fanoutScale
         };
 
         let nodes: node[] = this.collectNodesToArray(
