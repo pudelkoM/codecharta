@@ -28,7 +28,9 @@ export function createDefaultScenario(map: CodeMap): Scenario {
             operation: STATISTIC_OPS.NOTHING,
             deltaColorFlipped: false,
             showDependencies: false,
-            minimizeDetailPanel: false
+            minimizeDetailPanel: false,
+            fanoutDepths: [],
+            fanoutScale: 2
         },
         autoFitCamera: true
     };

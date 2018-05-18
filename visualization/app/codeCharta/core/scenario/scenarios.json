@@ -55,7 +55,9 @@
       "margin": 1,
       "deltaColorFlipped": false,
       "showDependencies": false,
-      "minimizeDetailPanel": false
+      "minimizeDetailPanel": false,
+      "fanoutDepths": [],
+      "fanoutScale": 2
     }
   },
   {
@@ -84,7 +86,9 @@
       "margin": 1,
       "deltaColorFlipped": false,
       "showDependencies": false,
-      "minimizeDetailPanel": false
+      "minimizeDetailPanel": false,
+      "fanoutDepths": [],
+      "fanoutScale": 2
     },
     "autoFitCamera": true
   },
@@ -114,7 +118,9 @@
       "margin": 1,
       "deltaColorFlipped": false,
       "showDependencies": false,
-      "minimizeDetailPanel": false
+      "minimizeDetailPanel": false,
+      "fanoutDepths": [],
+      "fanoutScale": 2
     },
     "autoFitCamera": true
   }
