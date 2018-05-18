@@ -3,6 +3,18 @@ import {node} from "../../ui/codeMap/rendering/node";
 
 export class TreeMapUtils {
 
+    public static getMaxNodeDepth(node: { children?: any }): number {
+        if(node && node.children) {
+            let max = 0;
+            node.children.forEach((x) => {
+               max = Math.max(TreeMapUtils.getMaxNodeDepth(x), max);
+            });
+            return max+1;
+        } else {
+            return 0;
+        }
+    }
+
     public static countNodes(node: { children?: any }): number {
         let count = 1;
         if (node.children && node.children.length > 0) {

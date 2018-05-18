@@ -3,6 +3,7 @@ import {node} from "../../ui/codeMap/rendering/node";
 import {DataService} from "../data/data.service";
 import squarify from "squarify";
 import {TreeMapUtils} from "./treemap.util";
+import {treemap} from "d3-hierarchy";
 
 export interface ValuedCodeMapNode {
     data: CodeMapNode;
@@ -117,25 +118,27 @@ export class TreeMapService {
 
         for (let i = 0; i < output.length; i++) {
 
-            let effectiveMargin = s.margin;
+            //let effectiveMargin = s.margin / depth;
+            let rest = TreeMapUtils.getMaxNodeDepth(output[i].ref);
+            console.log((rest+1)/(depth+rest+1));
+            let effectiveMargin = Math.max(1, Math.min(s.margin, s.margin * ((rest)/(depth+rest))));
             if (s.fanoutDepths.includes(depth)) {
                 effectiveMargin *= s.fanoutScale;
             }
-            let effectiveMarginRelativeToNodeSize = effectiveMargin*this.predictTotalMarginPerSide(output[i], s);
 
             squarifiedChildren.push({
                 value: output[i].value,
                 data: output[i].ref.data,
-                x0: output[i].x0 + effectiveMarginRelativeToNodeSize / 2,
-                y0: output[i].y0 + effectiveMarginRelativeToNodeSize / 2,
-                width: output[i].x1 - output[i].x0 - effectiveMarginRelativeToNodeSize,
-                length: output[i].y1 - output[i].y0 - effectiveMarginRelativeToNodeSize,
+                x0: output[i].x0 + effectiveMargin / 2,
+                y0: output[i].y0 + effectiveMargin / 2,
+                width: output[i].x1 - output[i].x0 - effectiveMargin,
+                length: output[i].y1 - output[i].y0 - effectiveMargin,
                 children: this.squarifyNodesIntoContainer(
                     output[i].ref.children,
-                    output[i].x1 - output[i].x0 - effectiveMarginRelativeToNodeSize,
-                    output[i].y1 - output[i].y0 - effectiveMarginRelativeToNodeSize,
-                    output[i].x0 + effectiveMarginRelativeToNodeSize / 2,
-                    output[i].y0 + effectiveMarginRelativeToNodeSize / 2,
+                    output[i].x1 - output[i].x0 - effectiveMargin,
+                    output[i].y1 - output[i].y0 - effectiveMargin,
+                    output[i].x0 + effectiveMargin / 2,
+                    output[i].y0 + effectiveMargin / 2,
                     depth + 1,
                     s
                 )
@@ -182,7 +185,7 @@ export class TreeMapService {
         let avgMargin = 0;
         margins.forEach((m)=>{avgMargin+=m;});
         avgMargin /= margins.length * 2;
-        return Math.sqrt(TreeMapUtils.countNodes(node)) * avgMargin * 2;
+        return Math.sqrt(TreeMapUtils.countNodes(node) * avgMargin * 2) * 4;
     }
 
 }
