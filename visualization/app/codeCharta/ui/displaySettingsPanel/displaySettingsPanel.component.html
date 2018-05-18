@@ -18,12 +18,43 @@
 
 <md-slider-container class="md-block">
     <span>Margin</span>
-    <md-slider flex step="1" min="1" max="100" ng-model="$ctrl.settingsService.settings.margin" id="margin-slider" ng-change="$ctrl.settingsService.applySettings()" class="md-primary">
+    <md-slider flex step="0.1" min="1" max="40" ng-model="$ctrl.settingsService.settings.margin" id="margin-slider" ng-change="$ctrl.settingsService.applySettings()" class="md-primary">
     </md-slider>
     <md-input-container>
         <input flex step="1" min="1" max="100" type="number" ng-model="$ctrl.settingsService.settings.margin" aria-controls="margin-slider">
     </md-input-container>
 </md-slider-container>
+
+<md-slider-container class="md-block">
+    <span>Margin</span>
+    <md-slider flex step="0.1" min="1" max="10" ng-model="$ctrl.settingsService.settings.fanoutScale" id="margin-slider" ng-change="$ctrl.settingsService.applySettings()" class="md-primary">
+    </md-slider>
+    <md-input-container>
+        <input flex step="1" min="1" max="100" type="number" ng-model="$ctrl.settingsService.settings.fanoutScale" aria-controls="margin-slider">
+    </md-input-container>
+</md-slider-container>
+
+<md-input-container class="md-block">
+    <md-checkbox class="md-primary" ng-model="$ctrl.fanoutDepth[1]" ng-change="$ctrl.apply()">
+        Fanout 1
+    </md-checkbox>
+</md-input-container>
+
+<md-input-container class="md-block">
+    <md-checkbox class="md-primary" ng-model="$ctrl.fanoutDepth[2]" ng-change="$ctrl.apply()">
+        Fanout 2
+    </md-checkbox>
+</md-input-container>
+<md-input-container class="md-block">
+    <md-checkbox class="md-primary" ng-model="$ctrl.fanoutDepth[3]" ng-change="$ctrl.apply()">
+        Fanout 3
+    </md-checkbox>
+</md-input-container>
+<md-input-container class="md-block">
+    <md-checkbox class="md-primary" ng-model="$ctrl.fanoutDepth[4]" ng-change="$ctrl.apply()">
+        Fanout 4
+    </md-checkbox>
+</md-input-container>
 
 <md-input-container class="md-block">
     <md-checkbox class="md-primary" ng-model="$ctrl.settingsService.settings.showDependencies" ng-change="$ctrl.settingsService.applySettings()">
