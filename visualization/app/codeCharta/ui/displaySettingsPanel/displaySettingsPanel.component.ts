@@ -9,26 +9,20 @@ export class DisplaySettingsPanelController {
     constructor(
         private settingsService: SettingsService
     ) {
-        this.fanoutDepth[1] = this.settingsService.settings.fanoutDepths.includes(1);
-        this.fanoutDepth[2] = this.settingsService.settings.fanoutDepths.includes(2);
-        this.fanoutDepth[3] = this.settingsService.settings.fanoutDepths.includes(3);
-        this.fanoutDepth[4] = this.settingsService.settings.fanoutDepths.includes(4);
+        for (var depth = 1; depth < 5; depth++) {
+            this.fanoutDepth[depth] = this.settingsService.settings.fanoutDepths.includes(depth);
+        }
     }
 
     apply() {
         this.settingsService.settings.fanoutDepths = [];
-        if(this.fanoutDepth[1]) {
-            this.settingsService.settings.fanoutDepths.push(1);
+
+        for (var depth = 1; depth < 5; depth++) {
+            if(this.fanoutDepth[depth]) {
+                this.settingsService.settings.fanoutDepths.push(depth);
+            }
         }
-        if(this.fanoutDepth[2]) {
-            this.settingsService.settings.fanoutDepths.push(2);
-        }
-        if(this.fanoutDepth[3]) {
-            this.settingsService.settings.fanoutDepths.push(3);
-        }
-        if(this.fanoutDepth[4]) {
-            this.settingsService.settings.fanoutDepths.push(4);
-        }
+
         this.settingsService.applySettings();
     }
 

@@ -1,4 +1,8 @@
 display-settings-panel-component {
-
+  .label-width {
+    display: block;
+    float: left;
+    min-width: 58px;
+  }
 }
 
