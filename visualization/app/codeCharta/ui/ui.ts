@@ -20,10 +20,18 @@ import "./resetSettingsButton/resetSettingsButton";
 import "./dialog/dialog";
 import "./nodeContextMenu/nodeContextMenu";
 import "./layoutSwitcher/layoutSwitcher";
+import "./ribbonBar/ribbonBar";
+import "./areaRibbon/areaRibbon";
+import "./colorRibbon/colorRibbon";
+import "./heightRibbon/heightRibbon";
 
 angular.module(
     "app.codeCharta.ui",
     [
+        "app.codeCharta.ui.areaRibbon",
+        "app.codeCharta.ui.heightRibbon",
+        "app.codeCharta.ui.colorRibbon",
+        "app.codeCharta.ui.ribbonBar",
         "app.codeCharta.ui.mapTreeView",
         "app.codeCharta.ui.settingsPanel",
         "app.codeCharta.ui.revisionChooser",
